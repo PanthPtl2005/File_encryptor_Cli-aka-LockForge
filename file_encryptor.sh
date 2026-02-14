@@ -28,7 +28,7 @@ encrypt_file() {
 
     output="$file.enc"
 
-    openssl enc -aes-256-cbc -salt -pbkdf2 \
+    openssl enc -aes-256-gcm -salt -pbkdf2 \
     -in "$file" -out "$output" -pass pass:"$password"
 
     echo "Encrypted file saved as $output"
@@ -47,7 +47,7 @@ decrypt_file() {
 
     output="${file%.enc}"
 
-    openssl enc -d -aes-256-cbc -pbkdf2 \
+    openssl enc -d -aes-256-gcm -pbkdf2 \
     -in "$file" -out "$output" -pass pass:"$password"
 
     if [ $? -eq 0 ]; then
